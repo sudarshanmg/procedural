@@ -12,7 +12,7 @@ This project implements a smooth snake-like movement simulation where each segme
 
 ### **1. Distance Constraint**
 
-Each segment follows the previous one while maintaining a fixed distance \(d\). Given the target position \((x_t, y_t)\), the new position \((x_n, y_n)\) is computed as:
+Each segment follows the previous one while maintaining a fixed distance $$d$$. Given the target position $\(x_t, y_t)$, the new position $\(x_n, y_n$) is computed as:
 
 $$dx = x_t - x$$
 $$dy = y_t - y$$
@@ -25,7 +25,7 @@ $$y_n = y_t - dy \times \frac{d}{\text{distance}}$$
 
 ### **2. Angle Constraint**
 
-To prevent sharp turns, we limit the angle \(\theta\) between two consecutive segments.
+To prevent sharp turns, we limit the angle $\theta$ between two consecutive segments.
 
 Given vectors **A** and **B**:
 
