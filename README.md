@@ -42,7 +42,7 @@ $$A \cdot B = (x_p - x_t)(x_n - x_t) + (y_p - y_t)(y_n - y_t)$$
 $$|A| = \sqrt{(x_p - x_t)^2 + (y_p - y_t)^2}$$
 $$|B| = \sqrt{(x_n - x_t)^2 + (y_n - y_t)^2}$$
 
-If \(\theta\) is too small, we correct it by rotating vector \(B\):
+If $\theta$ is too small, we correct it by rotating vector \(B\):
 
 $$\theta' = \theta_{\text{correction}} \times \text{sign}(\text{cross})$$
 
@@ -75,7 +75,7 @@ $$y_{\text{left}} = y + r \sin(\theta_{\text{smooth}} + \phi)$$
 $$x_{\text{right}} = x + r \cos(\theta_{\text{smooth}} - \phi)$$
 $$y_{\text{right}} = y + r \sin(\theta_{\text{smooth}} - \phi)$$
 
-where \(\phi\) is the fixed eye offset angle (e.g., \(45^\circ\)).
+where $\phi$ is the fixed eye offset angle (e.g., 45 deg).
 
 ## Code Implementation
 
