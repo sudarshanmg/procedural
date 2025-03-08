@@ -15,7 +15,7 @@ const createHighDPICanvas = (height, width) => {
 
 const ctx = createHighDPICanvas(600, 600);
 
-const numCircles = 20; // Snake length
+const numCircles = 30; // Snake length
 const circles = [];
 for (let i = 0; i < numCircles; i++) {
   circles.push(new Circle(250, 250, 10 - i * 0.2, 20, ctx, i));
