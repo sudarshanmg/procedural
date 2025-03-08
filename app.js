@@ -79,7 +79,7 @@ class Circle {
         const dot = ax * bx + ay * by;
 
         const angle = Math.acos(dot / (mod_a * mod_b));
-        const MIN_ANGLE = (130 * Math.PI) / 180; // 150 deg
+        const MIN_ANGLE = (130 * Math.PI) / 180; // 130 deg
 
         if (angle < Math.PI / 2) {
           const angle_correction = MIN_ANGLE - angle;
@@ -111,7 +111,7 @@ const createHighDPICanvas = (height, width) => {
 
 const ctx = createHighDPICanvas(600, 600);
 
-const numCircles = 10; // Snake length
+const numCircles = 20; // Snake length
 const circles = [];
 for (let i = 0; i < numCircles; i++) {
   circles.push(new Circle(250, 250, 10 - i * 0.2, 20, ctx, i));
@@ -120,9 +120,12 @@ for (let i = 0; i < numCircles; i++) {
 canvas.addEventListener("mousemove", (e) => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  circles[0].x = e.offsetX;
-  circles[0].y = e.offsetY;
+  // Smoothly move head towards the mouse
+  const smoothingFactor = 0.1; // Adjust for more or less smoothness
+  circles[0].x += (e.offsetX - circles[0].x) * smoothingFactor;
+  circles[0].y += (e.offsetY - circles[0].y) * smoothingFactor;
 
+  // Make the rest of the snake follow the previous segment
   for (let i = 1; i < circles.length; i++) {
     circles[i].follow(
       circles[i - 1].x,
@@ -132,5 +135,6 @@ canvas.addEventListener("mousemove", (e) => {
     );
   }
 
+  // Draw all circles
   circles.forEach((circle) => circle.draw());
 });
