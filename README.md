@@ -132,9 +132,7 @@ if (angle < Math.PI / 2) {
 
 The eyes should point in the direction of movement. Compute the movement angle:
 
-\[
-\alpha = \tan^{-1} \left( \frac{y - y*{\text{prev}}}{x - x*{\text{prev}}} \right)
-\]
+\[\alpha = \tan^{-1} \left( \frac{y - y*{\text{prev}}}{x - x*{\text{prev}}} \right)\]
 
 Smoothly interpolate this angle using an exponential moving average:
 
