@@ -61,31 +61,30 @@ export class Circle {
       let scale = this.inf / distance;
       this.x = targetX - dx * scale;
       this.y = targetY - dy * scale;
+    }
+    // angle constraint
+    if (prevX !== undefined && prevY !== undefined) {
+      const ax = prevX - targetX;
+      const ay = prevY - targetY;
+      const bx = this.x - targetX;
+      const by = this.y - targetY;
+      const mod_a = Math.sqrt(ax * ax + ay * ay);
+      const mod_b = Math.sqrt(bx * bx + by * by);
+      const dot = ax * bx + ay * by;
 
-      // angle constraint
-      if (prevX !== undefined && prevY !== undefined) {
-        const ax = prevX - targetX;
-        const ay = prevY - targetY;
-        const bx = this.x - targetX;
-        const by = this.y - targetY;
-        const mod_a = Math.sqrt(ax * ax + ay * ay);
-        const mod_b = Math.sqrt(bx * bx + by * by);
-        const dot = ax * bx + ay * by;
+      const angle = Math.acos(dot / (mod_a * mod_b));
+      const MIN_ANGLE = (130 * Math.PI) / 180; // 130 deg
 
-        const angle = Math.acos(dot / (mod_a * mod_b));
-        const MIN_ANGLE = (130 * Math.PI) / 180; // 130 deg
+      if (angle < Math.PI / 2) {
+        const angle_correction = MIN_ANGLE - angle;
+        const cross = ax * by - ay * bx;
+        const direction = cross > 0 ? 1 : -1; // 1 for CCW, -1 for CW
+        const theta = direction * angle_correction;
+        const cosTheta = Math.cos(theta);
+        const sinTheta = Math.sin(theta);
 
-        if (angle < Math.PI / 2) {
-          const angle_correction = MIN_ANGLE - angle;
-          const cross = ax * by - ay * bx;
-          const direction = cross > 0 ? 1 : -1; // 1 for CCW, -1 for CW
-          const theta = direction * angle_correction;
-          const cosTheta = Math.cos(theta);
-          const sinTheta = Math.sin(theta);
-
-          this.x = targetX + bx * cosTheta - by * sinTheta;
-          this.y = targetY + bx * sinTheta + by * cosTheta;
-        }
+        this.x = targetX + bx * cosTheta - by * sinTheta;
+        this.y = targetY + bx * sinTheta + by * cosTheta;
       }
     }
   }
